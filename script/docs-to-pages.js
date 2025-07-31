@@ -37,6 +37,19 @@ function shiftHeadingLevelsHtml(html, n = 1) {
   return $.html();
 }
 
+// 余計な属性削除
+function stripAttributesFromHtml(html, keepAttrs = ['src', 'href', 'alt']) {
+  const $ = cheerio.load(html);
+  $('*').each(function () {
+    const oldAttrs = this.attribs;
+    for (const attr in oldAttrs) {
+      if (!keepAttrs.includes(attr)) {
+        $(this).removeAttr(attr);
+      }
+    }
+  });
+  return $.html();
+}
 
 // テンプレート名から出力先パスを決定
 function templatePathToOutputPath(templatePath) {
@@ -116,6 +129,7 @@ async function main() {
         docsBody = '';
       }
       docsBody = shiftHeadingLevelsHtml(docsBody);
+      docsBody = stripAttributesFromHtml(docsBody)
       html = html.replace(m[0], docsBody);
     }
 
