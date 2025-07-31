@@ -30,7 +30,7 @@ jobs:
 
       - name: 静的サイト生成
         run: |
-          node docs-to-pages.js
+          node script/docs-to-pages.js
 
       - name: Add CNAME file
         run: echo 'jichiro.jpcenter.online' > public/CNAME
