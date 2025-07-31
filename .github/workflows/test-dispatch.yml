@@ -1,12 +1,42 @@
-name: Test Dispatch Trigger
+name: Docs to Pages Static Site Generator
 
 on:
-  repository_dispatch:
-    types: [google_docs_publish]
+  push:
+  workflow_dispatch:        # 手動実行もできる
+  schedule:
+    - cron: '0 * * * *'    # 毎時0分（毎時実行/必要に応じて変更）
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
-  just-test:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Print from dispatch
-        run: echo "Dispatched by Google Docs! Doc ID is ${{ github.event.client_payload.docId }}"
+      - name: チェックアウト
+        uses: actions/checkout@v4
+
+      - name: Node.js セットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 依存パッケージインストール
+        run: |
+          npm install node-fetch@2 cheerio
+
+      - name: 静的サイト生成
+        run: |
+          node docs-to-pages.js
+
+      - name: Add CNAME file
+        run: echo 'jichiro.jpcenter.online' > public/CNAME
+
+      - name: GitHub Pages デプロイ
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
