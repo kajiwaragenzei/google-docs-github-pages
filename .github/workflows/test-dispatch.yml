@@ -1,0 +1,12 @@
+name: Test Dispatch Trigger
+
+on:
+  repository_dispatch:
+    types: [google_docs_publish]
+
+jobs:
+  just-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print from dispatch
+        run: echo "Dispatched by Google Docs! Doc ID is ${{ github.event.client_payload.docId }}"
