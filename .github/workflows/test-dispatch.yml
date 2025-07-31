@@ -2,9 +2,11 @@ name: Docs to Pages Static Site Generator
 
 on:
   push:
-  workflow_dispatch:        # 手動実行もできる
-  schedule:
-    - cron: '0 * * * *'    # 毎時0分（毎時実行/必要に応じて変更）
+  repository_dispatch:
+    types: [google_docs_publish]
+  workflow_dispatch:
+  # schedule:
+    # - cron: '0 * * * *'    # 毎時0分（毎時実行/必要に応じて変更）
 
 permissions:
   contents: write
