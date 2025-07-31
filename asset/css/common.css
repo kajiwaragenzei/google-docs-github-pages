@@ -27,10 +27,15 @@ header {
 }
 
 header h1 {
+  display: inline-block;
+  text-shadow: 1px 1px 6px black;
   font-size: 1.3rem;
   margin: 0;
   letter-spacing: 0.06em;
   font-weight: 700;
+}
+header a h1 {
+    color: white;
 }
 
 /* MAIN LAYOUT */
