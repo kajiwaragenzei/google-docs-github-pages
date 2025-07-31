@@ -124,6 +124,7 @@ async function main() {
   const validFiles = templates.map(tpl => templatePathToOutputPath(tpl));
   const validFilesSet = new Set(validFiles);
   const docIdMap = JSON.parse(process.env.DOC_IDS_JSON);
+  console.log(docIdMap)
   cleanOutputDir('public', validFilesSet);
 
   for (const tpl of templates) {
