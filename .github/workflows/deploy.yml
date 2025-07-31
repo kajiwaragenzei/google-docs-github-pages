@@ -12,11 +12,11 @@ permissions:
   contents: write
   pages: write
   id-token: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      DOC_IDS_JSON: ${{ secrets.DOC_IDS_JSON }}
     steps:
       - name: チェックアウト
         uses: actions/checkout@v4
