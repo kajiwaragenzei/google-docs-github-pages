@@ -119,11 +119,11 @@ async function fetchDocsBody(docId) {
 }
 
 async function main() {
-  // テンプレ取得・出力先計算・不要ファイル削除は現行ロジックでOK
   const templatesDir = 'template';
   const templates = getAllTemplates(templatesDir);
   const validFiles = templates.map(tpl => templatePathToOutputPath(tpl));
   const validFilesSet = new Set(validFiles);
+  const docIdMap = JSON.parse(process.env.DOC_IDS_JSON);
   cleanOutputDir('public', validFilesSet);
 
   for (const tpl of templates) {
@@ -133,19 +133,22 @@ async function main() {
     html = applyIncludes(html);
 
     // Google Docs差し込み
-    const docIdMatches = [...html.matchAll(/<!--\s*docId:\s*([a-zA-Z0-9_-]+)\s*-->/g)];
-    for (const m of docIdMatches) {
-      const docId = m[1];
+    const docKeyMatches = [...html.matchAll(/<!--\s*docKey:\s*([a-zA-Z0-9_-]+)\s*-->/g)];
+    for (const m of docKeyMatches) {
+      const key = m[1];
+      const docId = docIdMap[key];
       let docsBody = '';
-      try {
-        docsBody = await fetchDocsBody(docId);
-      } catch (e) {
-        console.warn(`Docs fetch failed: ${docId} (${e.message})`);
-        docsBody = '';
+      if (docId) {
+        try {
+          docsBody = await fetchDocsBody(docId);
+          docsBody = shiftHeadingLevelsHtml(docsBody);
+          docsBody = stripAttributesFromHtml(docsBody);
+          docsBody = fixGoogleRedirectLinks(docsBody);
+        } catch (e) {
+          console.warn(`Docs fetch failed: ${docId} (${e.message})`);
+          docsBody = '';
+        }
       }
-      docsBody = shiftHeadingLevelsHtml(docsBody);
-      docsBody = stripAttributesFromHtml(docsBody)
-      docsBody = fixGoogleRedirectLinks(docsBody)
       html = html.replace(m[0], docsBody);
     }
 
