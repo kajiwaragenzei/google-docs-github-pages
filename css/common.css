@@ -166,6 +166,7 @@ footer {
   border-top: 1px solid #e0e0e0;
 }
 
+
 /* メディアクエリ（タブレット/PC向け微調整） */
 @media (min-width: 640px) {
   header h1 { font-size: 1.6rem; }
