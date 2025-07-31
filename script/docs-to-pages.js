@@ -51,6 +51,21 @@ function stripAttributesFromHtml(html, keepAttrs = ['src', 'href', 'alt']) {
   return $.html();
 }
 
+// Googleリダイレクトリンクから修正
+function fixGoogleRedirectLinks(html) {
+  const $ = cheerio.load(html);
+  $('a[href^="https://www.google.com/url?"]').each(function () {
+    const href = $(this).attr('href');
+    // q= の値を抽出
+    const qMatch = href.match(/[?&]q=([^&]+)/);
+    if (qMatch) {
+      const decoded = decodeURIComponent(qMatch[1]);
+      $(this).attr('href', decoded);
+    }
+  });
+  return $.html();
+}
+
 // テンプレート名から出力先パスを決定
 function templatePathToOutputPath(templatePath) {
   if (templatePath === 'home.html') return 'index.html';
@@ -130,6 +145,7 @@ async function main() {
       }
       docsBody = shiftHeadingLevelsHtml(docsBody);
       docsBody = stripAttributesFromHtml(docsBody)
+      docsBody = fixGoogleRedirectLinks(docsBody)
       html = html.replace(m[0], docsBody);
     }
 
