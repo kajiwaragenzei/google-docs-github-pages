@@ -18,6 +18,26 @@ function getAllTemplates(dir, prefix = '') {
   return files;
 }
 
+// heading下げ
+function shiftHeadingLevelsHtml(html, n = 1) {
+  const $ = cheerio.load(html);
+  // h1～h6まで
+  for (let i = 6; i >= 1; i--) {
+    const from = `h${i}`;
+    let to = i + n;
+    if (to > 6) to = 6; // h7はh6に
+    const toTag = `h${to}`;
+    $(from).each(function () {
+      $(this).replaceWith(function () {
+        // 属性・内容を維持したままタグ名だけ変える
+        return $('<' + toTag + '/>').html($(this).html()).attr($(this).attr());
+      });
+    });
+  }
+  return $.html();
+}
+
+
 // テンプレート名から出力先パスを決定
 function templatePathToOutputPath(templatePath) {
   if (templatePath === 'home.html') return 'index.html';
@@ -95,6 +115,7 @@ async function main() {
         console.warn(`Docs fetch failed: ${docId} (${e.message})`);
         docsBody = '';
       }
+      docsBody = shiftHeadingLevelsHtml(docsBody);
       html = html.replace(m[0], docsBody);
     }
 
