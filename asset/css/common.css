@@ -384,6 +384,7 @@ footer {
 @media (min-width: 1250px) {
   .page-nav-side { display: block; } /* 指定幅以上で表示 */
   .page-nav { display: none; } /* ハンバーガー非表示 */
+  footer { margin-top: 400px; } /* 下部にいったときの調整 */
 }
 
 /* メディアクエリ（タブレット/PC向け微調整） */
