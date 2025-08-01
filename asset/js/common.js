@@ -80,55 +80,78 @@ document.addEventListener('DOMContentLoaded', () => {
   hero.appendChild(contentBox);
 });
 
+// ナビゲーション
 document.addEventListener('DOMContentLoaded', () => {
-  // h2全取得＆id自動付与
-  const h2s = Array.from(document.querySelectorAll('article h2'));
-  if (h2s.length === 0) return;
+  // ====== 設定 ======
+  const articleSelector = 'article'; // h2探す範囲。必要に応じて調整
+  const menuTitle = ''; // 目次上部にタイトルを付けたい場合
 
-  // slugify関数（日本語でもOK・シンプル版）
+  // ====== h2→id付与 & 目次リスト生成 ======
+  const h2s = Array.from(document.querySelectorAll(`${articleSelector} h2`));
+  if (!h2s.length) return;
+
+  // slugify: 日本語含むh2→id安全変換
   const slugify = s => s.trim()
-    .replace(/[ 　]/g, '-')             // スペースを-
-    .replace(/[^\w\-一-龠ぁ-んァ-ヴー]/g, '') // 英数字・ひらがな・カタカナ・漢字以外消す
-    .replace(/-{2,}/g, '-')             // -重複を1つ
-    .replace(/^-|-$/g, '')              // 先頭末尾の-除去
+    .replace(/[ 　]/g, '-')             // スペース→-
+    .replace(/[^\w\-一-龠ぁ-んァ-ヴー]/g, '') // 記号除去
+    .replace(/-{2,}/g, '-')             // --→-
+    .replace(/^-|-$/g, '')              // 先頭末尾-
     .toLowerCase();
 
   const menuList = [];
   h2s.forEach(h2 => {
     let txt = h2.textContent || h2.innerText;
     let id = slugify(txt);
-    // id重複対策
-    let uniqueId = id;
-    let i = 2;
-    while (document.getElementById(uniqueId)) {
-      uniqueId = id + '-' + i++;
-    }
+    let uniqueId = id, i = 2;
+    while (document.getElementById(uniqueId)) uniqueId = id + '-' + i++;
     h2.id = uniqueId;
     menuList.push({ text: txt, id: uniqueId });
   });
 
-  // メニューHTML生成
-  const menu = document.createElement('nav');
-  menu.className = 'page-nav';
-  menu.innerHTML = `
-    <button class="menu-toggle" aria-label="メニュー"><span></span><span></span><span></span></button>
-    <ul>${menuList.map(item => `<li><a href="#${item.id}">${item.text}</a></li>`).join('')}</ul>
+  // ====== モーダル式メニューHTMLを生成・挿入 ======
+  const nav = document.createElement('nav');
+  nav.className = 'page-nav';
+  nav.innerHTML = `
+    <button class="menu-toggle" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="menu-modal">
+      <div class="modal-content">
+        ${menuTitle ? `<div class="modal-title">${menuTitle}</div>` : ''}
+        <ul>
+          ${menuList.map(item => `<li><a href="#${item.id}">${item.text}</a></li>`).join('')}
+        </ul>
+      </div>
+    </div>
   `;
-  document.body.appendChild(menu);
+  document.body.appendChild(nav);
 
-  // 開閉挙動
-  const toggleBtn = menu.querySelector('.menu-toggle');
-  const navList = menu.querySelector('ul');
+  const toggleBtn = nav.querySelector('.menu-toggle');
+  const modal = nav.querySelector('.menu-modal');
+  const ul = nav.querySelector('ul');
+
+  // ====== モーダル開閉 ======
   toggleBtn.addEventListener('click', () => {
-    navList.classList.toggle('open');
+    modal.classList.toggle('open');
     toggleBtn.classList.toggle('open');
+    document.body.style.overflow = modal.classList.contains('open') ? 'hidden' : '';
   });
 
-  // メニュークリックで閉じる（モバイル用）
-  navList.addEventListener('click', e => {
-    if (e.target.tagName === 'A') {
-      navList.classList.remove('open');
+  // モーダル外クリックで閉じる
+  modal.addEventListener('click', e => {
+    if (e.target === modal) {
+      modal.classList.remove('open');
       toggleBtn.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // メニュー項目クリックで閉じる
+  ul.addEventListener('click', e => {
+    if (e.target.tagName === 'A') {
+      modal.classList.remove('open');
+      toggleBtn.classList.remove('open');
+      document.body.style.overflow = '';
     }
   });
 });
