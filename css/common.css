@@ -353,7 +353,7 @@ footer {
   padding: 1.2em 1em;
   font-size: 1em;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1250px) {
   .page-nav-side { display: block; }
   .page-nav { display: none; } /* ハンバーガー非表示 */
 }
