@@ -64,7 +64,6 @@ section.hero img {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 1.1rem 0 0.2rem 0;
 }
 
 section.news h2 {
@@ -178,14 +177,18 @@ footer {
 }
 
 /* HERO */
-
+.hero-container {
+  display:flex;
+  justify-content:center;
+  /* background: gold; */
+}
 .hero {
   position: relative;
   width: 100%;
   max-width: 900px;
   aspect-ratio: 1.4/1; /* 横長比率 */
-  margin: 2.3em auto 2em auto;
-  background: gold;
+  margin: 0;
+  /* background: gold; */
   overflow: hidden;
 }
 .hero-title {
