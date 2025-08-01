@@ -82,11 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ナビゲーション
 document.addEventListener('DOMContentLoaded', () => {
-  // ====== 設定 ======
+  // 設定
   const articleSelector = 'article'; // h2探す範囲。必要に応じて調整
   const menuTitle = ''; // 目次上部にタイトルを付けたい場合
 
-  // ====== h2→id付与 & 目次リスト生成 ======
+  // h2→id付与 & 目次リスト生成
   const h2s = Array.from(document.querySelectorAll(`${articleSelector} h2`));
   if (!h2s.length) return;
 
@@ -108,7 +108,18 @@ document.addEventListener('DOMContentLoaded', () => {
     menuList.push({ text: txt, id: uniqueId });
   });
 
-  // ====== モーダル式メニューHTMLを生成・挿入 ======
+  // サイド用ナビを生成（PC時のみ表示）
+  const sideNav = document.createElement('aside');
+  sideNav.className = 'page-nav-side';
+  sideNav.innerHTML = `
+    <div class="side-nav-title">目次</div>
+    <ul>
+      ${menuList.map(item => `<li><a href="#${item.id}">${item.text}</a></li>`).join('')}
+    </ul>
+  `;
+  document.querySelector('.container').prepend(sideNav);
+
+  // モーダル式メニューHTMLを生成・挿入
   const nav = document.createElement('nav');
   nav.className = 'page-nav';
   nav.innerHTML = `
@@ -130,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = nav.querySelector('.menu-modal');
   const ul = nav.querySelector('ul');
 
-  // ====== モーダル開閉 ======
+  // モーダル開閉
   toggleBtn.addEventListener('click', () => {
     modal.classList.toggle('open');
     toggleBtn.classList.toggle('open');
