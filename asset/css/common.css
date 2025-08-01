@@ -39,6 +39,14 @@ header a h1 {
 }
 
 /* MAIN LAYOUT */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5em;
+}
 main {
   max-width: 700px;
   margin: 0 auto;
@@ -171,8 +179,6 @@ footer {
   border-top: 1px solid #e0e0e0;
 }
 
-
-
 /* HERO */
 .hero {
   display: flex;
@@ -231,8 +237,9 @@ footer {
   }
 }
 
-/* ページナビゲーション */
+/* ページナビゲーション SP */
 .page-nav {
+  display: block;
   position: fixed;
   top: 20px; right: 20px;
   z-index: 9000;
@@ -330,6 +337,26 @@ footer {
   }
 }
 
+
+/* ページナビゲーション PC */
+.page-nav-side {
+  display: none;
+  min-width: 220px;
+  max-width: 300px;
+  margin-right: 2em;
+  position: sticky;
+  top: 2.2em;
+  height: fit-content;
+  background: #fffbea;
+  border-radius: 1em;
+  box-shadow: 0 4px 16px rgba(45,55,72,0.07);
+  padding: 1.2em 1em;
+  font-size: 1em;
+}
+@media (min-width: 1200px) {
+  .page-nav-side { display: block; }
+  .page-nav { display: none; } /* ハンバーガー非表示 */
+}
 
 /* メディアクエリ（タブレット/PC向け微調整） */
 @media (min-width: 640px) {
