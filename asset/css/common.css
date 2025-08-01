@@ -185,7 +185,7 @@ footer {
 .hero {
   position: relative;
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px;
   aspect-ratio: 1.4/1; /* 横長比率 */
   margin: 0;
   /* background: gold; */
@@ -193,7 +193,7 @@ footer {
 }
 .hero-title {
   text-align: center;
-  font-size: clamp(2em, 9vw, 5em);
+  font-size: clamp(2em, 9vw, 5.2em);
   font-weight: 800;
   color: dodgerblue;
   letter-spacing: 0.02em;
