@@ -231,6 +231,9 @@ footer {
   text-shadow: 1px 2px 5px #00446b15;
   margin-left: 0 !important;
 }
+.hero-label .gold {
+  color: gold;
+}
 .hero-label:nth-child(1) { transform: rotate(-8deg) translateY(0); }
 .hero-label:nth-child(2) { transform: rotate(-8deg) translateY(1px); }
 .hero-label:nth-child(3) { transform: rotate(-8deg) translateY(9px); }
