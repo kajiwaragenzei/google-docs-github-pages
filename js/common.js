@@ -51,34 +51,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-// HERO用組み換え
-document.addEventListener('DOMContentLoaded', () => {
-  const hero = document.querySelector('.hero');
-  if (!hero) return;
-
-  // 画像だけ取り出して .hero-image で包む
-  const img = hero.querySelector('img');
-  if (img) {
-    // 既存の親ごと.remove()（pやspanも消える）
-    img.closest('p') ? img.closest('p').remove() : img.remove();
-
-    // .hero-image作成＆画像挿入
-    const imgBox = document.createElement('div');
-    imgBox.className = 'hero-image';
-    imgBox.appendChild(img);
-    hero.prepend(imgBox);
-  }
-
-  // 残りの要素を全てまとめて .hero-content に包む
-  const contentBox = document.createElement('div');
-  contentBox.className = 'hero-content';
-
-  // 画像以外のすべての要素をheroから一時的に取り出し
-  while (hero.children.length > 1) {
-    contentBox.appendChild(hero.children[1]);
-  }
-  hero.appendChild(contentBox);
-});
 
 // ナビゲーション
 document.addEventListener('DOMContentLoaded', () => {
