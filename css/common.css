@@ -350,3 +350,6 @@ footer {
 @media (max-width: 420px) {
   header h1 { font-size: 1.1rem;}
 }
+@media (max-width: 400px) {
+  header h1 { font-size: 1rem;}
+}
