@@ -112,12 +112,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const sideNav = document.createElement('aside');
   sideNav.className = 'page-nav-side';
   sideNav.innerHTML = `
-    <div class="side-nav-title">目次</div>
     <ul>
+      <li><a href="#top">ページトップ</a></li>
       ${menuList.map(item => `<li><a href="#${item.id}">${item.text}</a></li>`).join('')}
+      <li><a href="/">サイトホーム</a></li>
     </ul>
   `;
-  document.querySelector('.container').prepend(sideNav);
+  document.querySelector('.container').append(sideNav);
 
   // モーダル式メニューHTMLを生成・挿入
   const nav = document.createElement('nav');
