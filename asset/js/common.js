@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ナビゲーション
 document.addEventListener('DOMContentLoaded', () => {
   // 設定
-  const articleSelector = 'article'; // h2探す範囲。必要に応じて調整
+  const articleSelector = 'main'; // h2探す範囲。必要に応じて調整
   const menuTitle = ''; // 目次上部にタイトルを付けたい場合
 
   // h2→id付与 & 目次リスト生成
@@ -131,7 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="modal-content">
         ${menuTitle ? `<div class="modal-title">${menuTitle}</div>` : ''}
         <ul>
+          <li><a href="#top">ページトップ</a></li>
           ${menuList.map(item => `<li><a href="#${item.id}">${item.text}</a></li>`).join('')}
+          <li><a href="/">サイトホーム</a></li>
         </ul>
       </div>
     </div>
