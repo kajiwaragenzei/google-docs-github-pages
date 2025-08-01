@@ -79,3 +79,56 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   hero.appendChild(contentBox);
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  // h2全取得＆id自動付与
+  const h2s = Array.from(document.querySelectorAll('article h2'));
+  if (h2s.length === 0) return;
+
+  // slugify関数（日本語でもOK・シンプル版）
+  const slugify = s => s.trim()
+    .replace(/[ 　]/g, '-')             // スペースを-
+    .replace(/[^\w\-一-龠ぁ-んァ-ヴー]/g, '') // 英数字・ひらがな・カタカナ・漢字以外消す
+    .replace(/-{2,}/g, '-')             // -重複を1つ
+    .replace(/^-|-$/g, '')              // 先頭末尾の-除去
+    .toLowerCase();
+
+  const menuList = [];
+  h2s.forEach(h2 => {
+    let txt = h2.textContent || h2.innerText;
+    let id = slugify(txt);
+    // id重複対策
+    let uniqueId = id;
+    let i = 2;
+    while (document.getElementById(uniqueId)) {
+      uniqueId = id + '-' + i++;
+    }
+    h2.id = uniqueId;
+    menuList.push({ text: txt, id: uniqueId });
+  });
+
+  // メニューHTML生成
+  const menu = document.createElement('nav');
+  menu.className = 'page-nav';
+  menu.innerHTML = `
+    <button class="menu-toggle" aria-label="メニュー"><span></span><span></span><span></span></button>
+    <ul>${menuList.map(item => `<li><a href="#${item.id}">${item.text}</a></li>`).join('')}</ul>
+  `;
+  document.body.appendChild(menu);
+
+  // 開閉挙動
+  const toggleBtn = menu.querySelector('.menu-toggle');
+  const navList = menu.querySelector('ul');
+  toggleBtn.addEventListener('click', () => {
+    navList.classList.toggle('open');
+    toggleBtn.classList.toggle('open');
+  });
+
+  // メニュークリックで閉じる（モバイル用）
+  navList.addEventListener('click', e => {
+    if (e.target.tagName === 'A') {
+      navList.classList.remove('open');
+      toggleBtn.classList.remove('open');
+    }
+  });
+});
