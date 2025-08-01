@@ -169,3 +169,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+(() => {
+  const menuLinks = Array.from(document.querySelectorAll('.page-nav-side li a'));
+  const headings = menuLinks.map(a => document.getElementById(a.getAttribute('href').slice(1)));
+  const offset = 80; // ヘッダー高さ等
+
+  function highlightActiveHeading() {
+    let index = 0;
+    const scrollY = window.scrollY || window.pageYOffset;
+
+    for (let i = 0; i < headings.length; i++) {
+      if (headings[i]) {
+        const top = headings[i].getBoundingClientRect().top + scrollY - offset;
+        if (scrollY >= top) {
+          index = i;
+        }
+      }
+    }
+
+    menuLinks.forEach((a, i) => {
+      if (i === index) {
+        a.classList.add('active');
+      } else {
+        a.classList.remove('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', highlightActiveHeading, { passive: true });
+  window.addEventListener('resize', highlightActiveHeading);
+  document.addEventListener('DOMContentLoaded', highlightActiveHeading);
+})();

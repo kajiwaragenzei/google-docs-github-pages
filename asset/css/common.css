@@ -337,7 +337,6 @@ footer {
   }
 }
 
-
 /* ページナビゲーション PC */
 .page-nav-side {
   display:none;
@@ -352,7 +351,6 @@ footer {
   text-align: left;
   z-index: 10;
 }
-
 .page-nav-side .side-nav-title {
   font-size: 1.14em;
   font-weight: 600;
@@ -360,17 +358,14 @@ footer {
   color: #333;
   text-align: center;
 }
-
 .page-nav-side ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
 .page-nav-side li {
   margin-bottom: 0.1em;
 }
-
 .page-nav-side li a {
   display: block;
   padding: 0.8em 1.2em;
@@ -382,8 +377,8 @@ footer {
   line-height: 1.55;
   word-break: break-all;
 }
-
-.page-nav-side li a:hover {
+.page-nav-side li a:hover,
+.page-nav-side li a.active {
   background: #ffd14744;
 }
 @media (min-width: 1250px) {
