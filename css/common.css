@@ -409,7 +409,7 @@ footer {
 }
 .page-nav-side li a:hover,
 .page-nav-side li a.active {
-  background: gold44;
+  background: #FFD14744;
 }
 @media (min-width: 1250px) {
   .page-nav-side { display: block; } /* 指定幅以上で表示 */
