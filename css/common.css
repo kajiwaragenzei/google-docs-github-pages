@@ -96,7 +96,7 @@ article h2 {
   /* border-left: 6px solid #0070c8; */
   font-size: 28px;
   padding: 0.55em 0.7em 0.35em 0.7em;
-  margin-top: 2.6em;    /* ← 上余白をしっかり */
+  margin-top: 3.6em;    /* ← 上余白をしっかり */
   margin-bottom: 1.2em; /* ← 下余白も広め */
   font-weight: 800;
   letter-spacing: 0.02em;
@@ -135,7 +135,7 @@ article p:has(img) + p {
 .img-modal-overlay img {
   max-width: 95vw; max-height: 90vh;
   box-shadow: 0 0 24px #000a;
-  border-radius: 10px; background: #fff;
+  /* border-radius: 10px; background: #fff; */
 }
 .img-modal-overlay:after {
   content: "✕";
@@ -317,7 +317,6 @@ footer {
   padding: 0.8em 1.2em;
   color: #222;
   text-decoration: none;
-  border-radius: 0.7em;
   font-size: 1.05em;
   transition: background 0.12s;
   line-height: 1.55;
