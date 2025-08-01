@@ -293,12 +293,11 @@ footer {
 }
 .page-nav .modal-content {
   background: #fff;
-  border-radius: 1.4em;
   box-shadow: 0 8px 40px rgba(45,55,72,0.18);
   padding: 1.5em 0.7em 1em 0.7em;
   min-width: 68vw;
-  max-width: 370px;
-  max-height: 78vh;
+  max-width: 600px;
+  max-height: 85vh;
   overflow-y: auto;
   text-align: left;
   font-size: 1.08em;
