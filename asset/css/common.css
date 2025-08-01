@@ -20,8 +20,7 @@ body {
 
 /* HEADER */
 header {
-  background: #FFD147;
-  color: #fff;
+  background: gold;
   padding: 1.2rem 1rem;
   text-align: left;
 }
@@ -35,7 +34,7 @@ header h1 {
   font-weight: 700;
 }
 header a h1 {
-    color: white;
+    color: dodgerblue;
 }
 
 /* MAIN LAYOUT */
@@ -92,7 +91,7 @@ article h2, article h3, article h4 {
 }
 article h2 {
   color: #111;
-  background: linear-gradient(300deg, #e9f1fa 2%, #ffd147);
+  background: linear-gradient(300deg, #e9f1fa 2%, gold);
   /* border-left: 6px solid #0070c8; */
   font-size: 28px;
   padding: 0.55em 0.7em 0.35em 0.7em;
@@ -104,7 +103,7 @@ article h2 {
   /* box-shadow: 0 3px 12px 0 rgba(24,49,83,0.04); */
   display: block;
 }
-article h3 { font-size: 1.05rem; border-left: 3px solid #ffd147; padding-left: 0.45em; }
+article h3 { font-size: 1.05rem; border-left: 3px solid gold; padding-left: 0.45em; }
 article h4 { font-size: 0.99rem; border-left: 2px solid #fde5a0; padding-left: 0.4em; }
 article p, article li { font-size: 0.98rem; }
 article ul, article ol { margin: 1em 0 1em 1.1em; padding: 0; }
@@ -180,61 +179,91 @@ footer {
 }
 
 /* HERO */
+
 .hero {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 1.4/1; /* 横長比率 */
+  margin: 2.3em auto 2em auto;
+  background: gold;
+  overflow: hidden;
+}
+.hero-title {
+  text-align: center;
+  font-size: clamp(2em, 9vw, 5em);
+  font-weight: 800;
+  color: dodgerblue;
+  letter-spacing: 0.02em;
+  line-height: 1.07;
+  margin-top: 0.70em;
+  margin-bottom: 0.30em;
+  text-shadow: 0 3px 10px #fff8;
+  z-index: 2;
+  position: relative;
+}
+.hero-title .title-line1 {font-size: 1em;}
+.hero-title .title-line2 {font-size: 1em;}
+.hero-labels {
+  position: absolute;
+  left: 3vw;
+  bottom: 4vh;
+  width: 70vw;
+  max-width: 700px;
+  z-index: 3;
   display: flex;
   flex-direction: column;
-  gap: 0;
-  background: #fff;
-  /* overflow: hidden; */
+  gap: 0.20em;
+  pointer-events: none;
 }
-/* モバイルは縦並び（デフォルト） */
-.hero-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  border-radius: 0;
-  max-height: 300px;
-}
-.hero-content h2 {
-  font-size: 1.3rem;
+.hero-label {
+  display: inline-block;
+  background: dodgerblue;
+  color: #fff;
+  font-size: clamp(1em, 5vw, 3em);
   font-weight: 800;
-  color: #222;
-  line-height: 1.35;
+  padding: 0.1em 0.3em 0.23em 0.3em;
+  box-shadow: 0 3px 12px rgba(36,119,197,0.14);
+  transform: rotate(-8deg);
+  width: fit-content;
+  text-shadow: 1px 2px 5px #00446b15;
+  margin-left: 0 !important;
 }
-.hero-content ul {
-  padding: 0 0 0 0.2em;
+.hero-label:nth-child(1) { transform: rotate(-8deg) translateY(0); }
+.hero-label:nth-child(2) { transform: rotate(-8deg) translateY(1px); }
+.hero-label:nth-child(3) { transform: rotate(-8deg) translateY(9px); }
+.hero-photo {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 40%;
+  overflow: hidden;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.hero-content ul li {
-  background: #FFD147;
-  margin-bottom: 0.5em;
-  color: #444;
-  list-style:none;
-  padding:10px;
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
-/* PC時：2カラム */
-@media (min-width: 640px) {
-  .hero {
-    flex-direction: row;
-    /* align-items: stretch; */
-  }
-  .hero-image {
-    flex: 0 0 300px;         /* 画像幅:お好みで */
-    max-width: 48vw;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    border-radius: 0;
-    overflow: hidden;
-    background: #f9f9f9;
-  }
-  .hero-content {
-    flex: 1 1 0%;
-    padding: 0 0 0 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+.hero-photolabel {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #fff;
+  font-size: 2vw;
+  font-weight: bold;
+  padding: 0.4em 1.2em 0.3em 1.2em;
+  z-index: 4;
+  letter-spacing: 0.07em;
+  line-height: 1.18;
+  pointer-events: none;
+}
+.hero-photolabel .name{
+  font-size: 4vw;
 }
 
 /* ページナビゲーション SP */
@@ -249,7 +278,7 @@ footer {
   flex-direction: column;
   gap: 5px;
   width: 50px; height: 50px;
-  background: #FFD147;
+  background: gold;
   border: none;
   border-radius: 50%;
   justify-content: center;
@@ -323,7 +352,7 @@ footer {
   word-break: break-all;
 }
 .page-nav .modal-content li a:hover {
-  background: #ffd14744;
+  background: gold44;
 }
 @media (max-width: 500px) {
   .page-nav .modal-content {
@@ -378,7 +407,7 @@ footer {
 }
 .page-nav-side li a:hover,
 .page-nav-side li a.active {
-  background: #ffd14744;
+  background: gold44;
 }
 @media (min-width: 1250px) {
   .page-nav-side { display: block; } /* 指定幅以上で表示 */
