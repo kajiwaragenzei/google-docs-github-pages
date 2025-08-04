@@ -372,7 +372,7 @@ footer {
   transition: opacity 0.18s;
 }
 .menu-toggle.translucent {
-  opacity: 0.42;
+  opacity: 0.2;
   pointer-events: auto;
   transition: opacity 0.18s;
 }
