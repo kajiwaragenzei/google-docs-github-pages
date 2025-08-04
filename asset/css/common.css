@@ -192,6 +192,8 @@ footer {
   overflow: hidden;
 }
 .hero-title {
+  text-decoration: none;
+  display: block;
   text-align: center;
   font-size: clamp(2em, 9vw, 5.2em);
   font-weight: 800;
@@ -204,6 +206,8 @@ footer {
   z-index: 2;
   position: relative;
 }
+.hero-title:visited {color: dodgerblue;}
+.hero-title:hover {text-decoration: none;}
 .hero-title .title-line1 {font-size: 1em;}
 .hero-title .title-line2 {font-size: 1em;}
 .hero-labels {
