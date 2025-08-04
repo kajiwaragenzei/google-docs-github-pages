@@ -312,9 +312,10 @@ footer {
   background: #fff;
   max-width: 310px;
   display: flex;
-  align-items: flex-start;
+  align-items: anchor-center;
   margin-bottom: 1.1em;
   box-shadow: 0 2px 8px #cfd8dc16;
+  justify-content: center;
 }
 .policy-num {
   font-size: 2.1em;
