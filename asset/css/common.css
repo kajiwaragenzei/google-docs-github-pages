@@ -89,7 +89,7 @@ article h2, article h3, article h4 {
 }
 article h2 {
   color: #111;
-  background: linear-gradient(300deg, #e9f1fa 2%, gold);
+  background: linear-gradient(300deg, transparent, gold);
   /* border-left: 6px solid #0070c8; */
   font-size: 28px;
   padding: 0.55em 0.7em 0.35em 0.7em;
@@ -209,7 +209,7 @@ footer {
 .hero-labels {
   position: absolute;
   left: 3vw;
-  bottom: 4vh;
+  bottom: 9%;
   width: 70vw;
   max-width: 700px;
   z-index: 3;
