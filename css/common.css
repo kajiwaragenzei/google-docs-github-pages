@@ -294,7 +294,8 @@ footer {
   text-shadow: 0 2px 8px #fff;
   gap: 1.1em;
 }
-.policy-index div.policy-index-header::after {
+.policy-index div.policy-index-header::after,
+.policy-index div.policy-index-header::before {
   content: "";
   flex: 1 1 0;
   height: 0.06em;
