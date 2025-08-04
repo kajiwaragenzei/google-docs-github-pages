@@ -141,6 +141,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // 透明イベントも付与
+  if (location.pathname === '/' || location.pathname === '/index.html') {
+    function updateMenuOpacity() {
+      const y = window.scrollY || window.pageYOffset;
+      if (y <= 50) {
+        toggleBtn.classList.add('translucent');
+      } else {
+        toggleBtn.classList.remove('translucent');
+      }
+    }
+    window.addEventListener('scroll', updateMenuOpacity, { passive: true });
+    updateMenuOpacity(); // 初期化
+  }
+
   // アクティブハイライト
   const menuLinks = Array.from(document.querySelectorAll('.page-nav-side li a'));
   const headings = menuLinks.map(a => document.getElementById(a.getAttribute('href').slice(1)));
